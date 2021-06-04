@@ -44,7 +44,8 @@ header {
         margin: auto;
         justify-content: center;
         width: 300px;
-        height: 520px;
+        height: 300px;
+        margin-top: 20px;
         border: 3px solid #333333;
     }
   }
@@ -69,13 +70,15 @@ header {
         display: grid;
         grid-template-columns: 1fr;
         margin-bottom: 20px;
+        margin-top: 20px;
     }
     #container {
         display: grid;
         margin: auto;
         justify-content: center;
         width: 400px;
-        height: 530px;
+        height: 400px;
+        margin-top: 20px;
         border: 3px solid #333333;
     }
   }
@@ -84,6 +87,8 @@ header {
     h2 {
         color: #706c61;
         font-size: 50px;
+        margin-top: 2px;
+        margin-bottom: 10px;
     }
     
     
