@@ -1,11 +1,21 @@
 const container = document.querySelector('#container');
-let box;
-
+const clearButton = document.querySelector('#clearBtn');
 
 let value = window.prompt('Enter the number of grids: ');
+let createBox;
+let boxStorage = {};
+
+clearButton.addEventListener('click', ()=> {
+    let length = value * value;
+    for (i = 1; i<=length;i++){
+        container.removeChild(boxStorage[i]);
+    }
+    value = window.prompt('Enter the number of grids: ');
+    checkValue(value);
+});
 
 checkValue(value);
-colorBoxes();
+
 
 function checkValue(userInput) {
     if (isNaN(userInput)) {
@@ -15,21 +25,25 @@ function checkValue(userInput) {
         userInput = window.prompt('You forgot to enter a number. Please enter the number of grids: ');
         checkValue(userInput);
     } else {
-        createBox(value);
+        createBoxes(value);
     }
 }
 
-function createBox(boxes) {
-    createColumns(boxes);
-    boxes *= boxes;
-
-    for (let i = 1; i <= boxes; i++) {
-        box = document.createElement('div');
-        box.classList.add('boxes')
-        box.setAttribute('style', ` border: 1px solid black; width: 50px; height: 50px; justify-self: center;`);
-        container.appendChild(box);
+function createBoxes(numberOfBoxes) {
+    
+    createColumns(numberOfBoxes);
+    numberOfBoxes *= numberOfBoxes;
+    for (let i = 1; i <= numberOfBoxes; i++) {
+        createBox = document.createElement('div');
+        boxStorage[i] = createBox;
+        createBox.setAttribute('id', `box${i}`);
+        createBox.classList.add('boxes');
+        createBox.setAttribute('style', ` border: 1px solid black; width: 50px; height: 50px; justify-self: center;`);
+        container.appendChild(createBox);
     }
+    colorBoxes();
 }
+
 
 function createColumns(cols) {
     for (let i = 1; i <= cols; i++) {
@@ -39,6 +53,7 @@ function createColumns(cols) {
                                          grid-template-columns: repeat(${i}, 50px);`);
     }
 }
+
 
 function colorBoxes() {
     let mouseTargets = document.querySelectorAll('.boxes');
@@ -56,21 +71,13 @@ function colorBoxes() {
     });
 }
 
-function generateColor(color){
+
+function generateColor(color) {
     let r, b, g = 0;
     let a = 1;
-    r = Math.floor((Math.random()*255000)/255);
-    g = Math.floor((Math.random()*255000)/255);
-    b = Math.floor((Math.random()*255000)/255);
-    if(r > 255){
-        r = 255;
-    }
-    if(g>255){
-        g = 255;
-    }
-    if(b>255){
-        b = 255;
-    }
+    r = Math.floor((Math.random() * 254));
+    g = Math.floor((Math.random() * 252));
+    b = Math.floor((Math.random() * 254));
     color = `rgba(${r}, ${g}, ${b}, ${a})`;
     return color;
 }
