@@ -1,13 +1,30 @@
-#main-container{
+#main-container {
     display: grid;
     justify-content: center;
 }
-#btnBar{
+
+#container {
+    display: grid;
+    margin: auto;
+    justify-content: center;
+    width: 550px;
+    height: 550px;
+    border: 1px solid black;
+}
+
+#btnBar {
     display: grid;
     margin-bottom: 20px;
-margin-top: 20px;
+    margin-top: 20px;
 }
-#clearBtn{
+
+#clearBtn {
     display: grid;
+    justify-self: center;
+}
+
+.boxes {
+    width: 100%;
+    height: 100%;
     justify-self: center;
 }

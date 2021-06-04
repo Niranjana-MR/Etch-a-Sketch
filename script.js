@@ -18,13 +18,18 @@ checkValue(value);
 
 
 function checkValue(userInput) {
+    userInput = Number(userInput);
     if (isNaN(userInput)) {
         userInput = window.prompt(`${userInput} is not a number. Please enter the number of grids: `);
         checkValue(userInput);
     } else if (userInput === '') {
         userInput = window.prompt('You forgot to enter a number. Please enter the number of grids: ');
         checkValue(userInput);
-    } else {
+    }else if(userInput>100){
+        userInput = window.prompt('Please enter a number of 100 or below: ');
+        checkValue(userInput);
+    } 
+    else {
         createBoxes(value);
     }
 }
@@ -38,7 +43,7 @@ function createBoxes(numberOfBoxes) {
         boxStorage[i] = createBox;
         createBox.setAttribute('id', `box${i}`);
         createBox.classList.add('boxes');
-        createBox.setAttribute('style', ` border: 1px solid black; width: 50px; height: 50px; justify-self: center;`);
+        //createBox.setAttribute('style', `width: 50px; height: 50px;`);
         container.appendChild(createBox);
     }
     colorBoxes();
@@ -47,10 +52,7 @@ function createBoxes(numberOfBoxes) {
 
 function createColumns(cols) {
     for (let i = 1; i <= cols; i++) {
-        container.setAttribute('style', `display: grid; 
-                                         margin: auto;
-                                         justify-content: center; 
-                                         grid-template-columns: repeat(${i}, 50px);`);
+        container.setAttribute('style', `grid-template-columns: repeat(${i}, 1fr);`);
     }
 }
 
@@ -61,12 +63,8 @@ function colorBoxes() {
     mouseTargets.forEach(box => {
         box.addEventListener('mouseenter', (e) => {
             randomColor = generateColor(randomColor);
-            box.setAttribute('style', `background-color:${randomColor};
-                                       border: 1px solid black;
-                                       width: 50px;
-                                       height: 50px;
-                                       justify-self: center;
-                            `);
+            box.classList.add('boxes');
+            box.setAttribute('style', `background-color:${randomColor};`);
         })
     });
 }
