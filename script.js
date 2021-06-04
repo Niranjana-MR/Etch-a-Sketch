@@ -1,13 +1,13 @@
 const container = document.querySelector('#container');
-const clearButton = document.querySelector('#clearBtn');
+const resetButton = document.querySelector('#resetBtn');
 
 let value = window.prompt('Enter the number of grids: ');
 let createBox;
 let boxStorage = {};
 
-clearButton.addEventListener('click', ()=> {
+resetButton.addEventListener('click', () => {
     let length = value * value;
-    for (i = 1; i<=length;i++){
+    for (i = 1; i <= length; i++) {
         container.removeChild(boxStorage[i]);
     }
     value = window.prompt('Enter the number of grids: ');
@@ -25,17 +25,16 @@ function checkValue(userInput) {
     } else if (userInput === '') {
         userInput = window.prompt('You forgot to enter a number. Please enter the number of grids: ');
         checkValue(userInput);
-    }else if(userInput>100){
+    } else if (userInput > 100) {
         userInput = window.prompt('Please enter a number of 100 or below: ');
         checkValue(userInput);
-    } 
-    else {
+    } else {
         createBoxes(value);
     }
 }
 
 function createBoxes(numberOfBoxes) {
-    
+
     createColumns(numberOfBoxes);
     numberOfBoxes *= numberOfBoxes;
     for (let i = 1; i <= numberOfBoxes; i++) {
@@ -43,7 +42,6 @@ function createBoxes(numberOfBoxes) {
         boxStorage[i] = createBox;
         createBox.setAttribute('id', `box${i}`);
         createBox.classList.add('boxes');
-        //createBox.setAttribute('style', `width: 50px; height: 50px;`);
         container.appendChild(createBox);
     }
     colorBoxes();
@@ -61,12 +59,12 @@ function colorBoxes() {
     let mouseTargets = document.querySelectorAll('.boxes');
     let randomColor = '';
     mouseTargets.forEach(box => {
-        box.addEventListener('mouseenter', (e) => {
+        box.addEventListener('mouseenter', () => { 
             randomColor = generateColor(randomColor);
             box.classList.add('boxes');
             box.setAttribute('style', `background-color:${randomColor};`);
         })
-    });
+    });    
 }
 
 
