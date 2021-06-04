@@ -1,16 +1,23 @@
 const container = document.querySelector('#container');
 const resetButton = document.querySelector('#resetBtn');
 
-let value = window.prompt('Enter the number of grids: ');
+let value = 0;
+value = window.prompt('Enter the number of squares per side (max 100)');
 let createBox;
 let boxStorage = {};
 
 resetButton.addEventListener('click', () => {
-    let length = value * value;
-    for (i = 1; i <= length; i++) {
-        container.removeChild(boxStorage[i]);
+    if (value > 0) {
+        let length = value * value;
+
+        for (i = 1; i <= length; i++) {
+            container.removeChild(boxStorage[i]);
+        }
     }
-    value = window.prompt('Enter the number of grids: ');
+    if (value < 0) {
+        value = 0;
+    }
+    value = window.prompt(' Enter the number of squares per side (max 100)');
     checkValue(value);
 });
 
@@ -18,18 +25,19 @@ checkValue(value);
 
 
 function checkValue(userInput) {
-    userInput = Number(userInput);
+
+    let newInput = 0;
+
     if (isNaN(userInput)) {
-        userInput = window.prompt(`${userInput} is not a number. Please enter the number of grids: `);
-        checkValue(userInput);
-    } else if (userInput === '') {
-        userInput = window.prompt('You forgot to enter a number. Please enter the number of grids: ');
-        checkValue(userInput);
+        alert('That was no a number. Press reset and try again!');
+    } else if (userInput == 0) {
+        alert('You forgot to enter a number. Press reset and try again!');
     } else if (userInput > 100) {
-        userInput = window.prompt('Please enter a number of 100 or below: ');
-        checkValue(userInput);
+        alert('Maximum number of squares per side = 100. Press reset and try again!');
+    } else if (userInput < 0) {
+        alert('Number of squares per side cannot be negative. Press reset and try again!');
     } else {
-        createBoxes(value);
+        createBoxes(userInput);
     }
 }
 
@@ -59,12 +67,12 @@ function colorBoxes() {
     let mouseTargets = document.querySelectorAll('.boxes');
     let randomColor = '';
     mouseTargets.forEach(box => {
-        box.addEventListener('mouseenter', () => { 
+        box.addEventListener('mouseenter', () => {
             randomColor = generateColor(randomColor);
             box.classList.add('boxes');
             box.setAttribute('style', `background-color:${randomColor};`);
         })
-    });    
+    });
 }
 
 
